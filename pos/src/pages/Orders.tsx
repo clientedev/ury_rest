@@ -191,7 +191,7 @@ export default function Orders() {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
-          <p className="text-xl font-semibold text-red-600 mb-2">Failed to load orders</p>
+          <p className="text-xl font-semibold text-red-600 mb-2">Falha ao carregar pedidos</p>
           <p className="text-gray-600">{error}</p>
         </div>
       </div>
@@ -215,7 +215,7 @@ export default function Orders() {
             </div>
           ) : orders.length === 0 ? (
             <div className="text-center mt-10">
-              <p className="text-gray-500">No orders found</p>
+              <p className="text-gray-500">Nenhum pedido encontrado</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto">
@@ -235,7 +235,7 @@ export default function Orders() {
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-xs text-gray-500">
-                          {order.restaurant_table ? `Table ${order.restaurant_table} • ` : ''}{order.order_type}
+                          {order.restaurant_table ? `Mesa ${order.restaurant_table} • ` : ''}{order.order_type}
                         </p>
                       </div>
                       <Badge variant={getBadgeVariant(order.status)} className="ml-2">
@@ -278,11 +278,11 @@ export default function Orders() {
                   className='w-20'
                   size="xs"
                 >
-                  Previous
+                  Anterior
                 </Button>
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-muted-foreground">
-                    Page {pagination.currentPage}
+                    Página {pagination.currentPage}
                   </span>
                 </div>
                 <Button
@@ -292,7 +292,7 @@ export default function Orders() {
                   className='w-20'
                   size="xs"
                 >
-                  Next
+                  Próxima
                 </Button>
               </div>
             </div>
@@ -304,8 +304,8 @@ export default function Orders() {
       <div className="w-96 bg-white border-l border-gray-200 flex flex-col h-[calc(100vh-4rem)] fixed right-0 z-10">
         {!selectedOrder ? (
           <div className="text-center h-full flex flex-col items-center justify-center text-gray-500 p-6">
-            <p className="text-lg font-medium mb-2">Select an order to view details</p>
-            <p className="text-sm">Click on any order card to view its details</p>
+            <p className="text-lg font-medium mb-2">Selecione um pedido para ver os detalhes</p>
+            <p className="text-sm">Clique em qualquer cartão de pedido para ver seus detalhes</p>
           </div>
         ) : selectedOrderLoading ? (
           <div className="flex items-center justify-center h-full">
@@ -313,7 +313,7 @@ export default function Orders() {
           </div>
         ) : selectedOrderError ? (
           <div className="text-center h-full flex flex-col items-center justify-center text-red-500 p-6">
-            <p className="text-lg font-medium mb-2">Failed to load order details</p>
+            <p className="text-lg font-medium mb-2">Falha ao carregar detalhes do pedido</p>
             <p className="text-sm">{selectedOrderError}</p>
           </div>
         ) : (
@@ -333,7 +333,7 @@ export default function Orders() {
                       disabled={editLoading}
                     >
                       <Pencil className="w-4 h-4" />
-                      {editLoading && <span className="ml-2 text-xs">Loading...</span>}
+                      {editLoading && <span className="ml-2 text-xs">Carregando...</span>}
                     </button>
                     <button
                       type="button"
@@ -354,14 +354,14 @@ export default function Orders() {
             <Dialog open={cancelDialogOpen} onOpenChange={setCancelDialogOpen}>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Cancel Order</DialogTitle>
+                  <DialogTitle>Cancelar Pedido</DialogTitle>
                   <DialogDescription>
-                    Please provide a reason for cancelling this order.
+                    Por favor, forneça um motivo para cancelar este pedido.
                   </DialogDescription>
                 </DialogHeader>
                 <div className="px-6 mb-3">
                 <Textarea
-                  placeholder="Enter cancel reason"
+                  placeholder="Digite o motivo do cancelamento"
                   value={cancelReason}
                   onChange={e => setCancelReason(e.target.value)}
                   disabled={cancelLoading}
@@ -370,10 +370,10 @@ export default function Orders() {
                 </div>
                 <DialogFooter>
                   <Button variant="outline" onClick={() => setCancelDialogOpen(false)} disabled={cancelLoading}>
-                    Close
+                    Fechar
                   </Button>
                   <Button variant="danger" onClick={handleCancelOrder} disabled={cancelLoading}>
-                    {cancelLoading ? 'Cancelling...' : 'Confirm Cancel'}
+                    {cancelLoading ? 'Cancelando...' : 'Confirmar Cancelamento'}
                   </Button>
                 </DialogFooter>
               </DialogContent>
@@ -413,13 +413,13 @@ export default function Orders() {
 
               {/* Order Items */}
               <div className="mb-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Order Items</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Itens do Pedido</h3>
                 <div className="space-y-3">
                   {selectedOrderItems.map((item, index) => (
                     <div key={index} className="flex justify-between items-start py-2 border-b border-gray-100">
                       <div className="flex-1">
                         <p className="text-sm font-medium text-gray-900">{item.item_name}</p>
-                        <p className="text-xs text-gray-500">Qty: {item.qty}</p>
+                        <p className="text-xs text-gray-500">Qtd: {item.qty}</p>
                       </div>
                       <div className="text-right">
                         <p className="text-sm font-semibold text-gray-900">
@@ -434,7 +434,7 @@ export default function Orders() {
               {/* Taxes */}
               {selectedOrderTaxes.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Taxes & Charges</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Taxas e Encargos</h3>
                   <div className="space-y-2">
                     {selectedOrderTaxes.map((tax, index) => (
                       <div key={index} className="flex justify-between items-center py-1">
@@ -469,13 +469,13 @@ export default function Orders() {
                     className="flex-1"
                     onClick={() => {
                       if (String(selectedOrder.invoice_printed) === '0') {
-                        showToast.error('Please print invoice before making payment');
+                        showToast.error('Por favor, imprima a fatura antes de realizar o pagamento');
                         return;
                       }
                       setShowPaymentDialog(true);
                     }}
                   >
-                    Payment
+                    Pagamento
                   </Button>
                 )}
                 {/* Total */}

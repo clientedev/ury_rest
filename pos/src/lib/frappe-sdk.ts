@@ -19,12 +19,40 @@ const mockPosProfile = {
   company: 'My Company'
 };
 
-const mockGet = (path: string) => {
+const mockOrders = [
+  {
+    name: 'PED-001',
+    customer: 'Cliente Padrão',
+    posting_date: '2026-01-22',
+    posting_time: '16:00:00',
+    status: 'Draft',
+    rounded_total: 50.0,
+    grand_total: 50.0,
+    waiter: 'Administrator',
+    items: [
+      { item_code: 'PROD001', item_name: 'Hambúrguer Clássico', rate: 25.0, qty: 2, amount: 50.0 }
+    ]
+  }
+];
+
+const mockGet = (path: string, params?: any) => {
   if (path === 'ury.ury_pos.api.getPosProfile') {
     return Promise.resolve({ message: mockPosProfile });
   }
   if (path === 'ury.ury_pos.api.getMenuCourses') {
     return Promise.resolve({ message: mockCategories });
+  }
+  if (path === 'ury.ury_pos.api.getOrders') {
+    return Promise.resolve({ 
+      message: { 
+        data: mockOrders,
+        hasNextPage: false,
+        totalCount: 1
+      } 
+    });
+  }
+  if (path.includes('frappe.client.get') && path.includes('POS+Invoice')) {
+    return Promise.resolve({ message: mockOrders[0] });
   }
   return Promise.resolve({ message: [], data: [] });
 };
