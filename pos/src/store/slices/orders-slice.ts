@@ -106,12 +106,16 @@ export const createOrdersSlice: StateCreator<
       // Default fetch
       const limitStart = (page - 1) * ITEMS_PER_PAGE;
       const status = selectedStatus;
-      const { invoices, hasMore } = await getPOSInvoices({
+      const response = await getPOSInvoices({
         status,
         limit: ITEMS_PER_PAGE,
         limit_start: limitStart,
         paid_limit: paidLimit
       });
+      
+      const invoices = response?.invoices || [];
+      const hasMore = response?.hasMore || false;
+
       set({ 
         orders: invoices,
         pagination: {

@@ -213,13 +213,13 @@ export default function Orders() {
             <div className="flex items-center justify-center h-full">
               <Spinner />
             </div>
-          ) : orders.length === 0 ? (
+          ) : (!orders || orders.length === 0) ? (
             <div className="text-center mt-10">
               <p className="text-gray-500">Nenhum pedido encontrado</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto">
-              {orders.map((order) => (
+              {(orders || []).map((order) => (
                 <Card 
                   key={order.name} 
                   className={`p-0 bg-white hover:shadow-md transition-shadow flex flex-col overflow-hidden cursor-pointer ${
@@ -415,7 +415,7 @@ export default function Orders() {
               <div className="mb-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Itens do Pedido</h3>
                 <div className="space-y-3">
-                  {selectedOrderItems.map((item, index) => (
+                  {(selectedOrderItems || []).map((item, index) => (
                     <div key={index} className="flex justify-between items-start py-2 border-b border-gray-100">
                       <div className="flex-1">
                         <p className="text-sm font-medium text-gray-900">{item.item_name}</p>
@@ -432,11 +432,11 @@ export default function Orders() {
               </div>
 
               {/* Taxes */}
-              {selectedOrderTaxes.length > 0 && (
+              {(selectedOrderTaxes || []).length > 0 && (
                 <div className="mb-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Taxas e Encargos</h3>
                   <div className="space-y-2">
-                    {selectedOrderTaxes.map((tax, index) => (
+                    {(selectedOrderTaxes || []).map((tax, index) => (
                       <div key={index} className="flex justify-between items-center py-1">
                         <span className="text-sm text-gray-600">{tax.description}</span>
                         <span className="text-sm font-medium text-gray-900">
