@@ -25,7 +25,7 @@ function App() {
       <ScreenSizeProvider>
         <AuthGuard>
           <POSOpeningProvider>
-            <Router basename="/pos">
+            <Router>
               <div className="flex flex-col h-screen bg-gray-100 font-inter">
                 <Header />
                 <div className="flex-1 overflow-hidden">

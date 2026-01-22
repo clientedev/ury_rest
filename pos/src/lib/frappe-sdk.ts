@@ -1,7 +1,21 @@
-import { FrappeApp } from "frappe-js-sdk";
+// Mock Frappe SDK to prevent API errors and loop in development
+const noop = () => Promise.resolve({ message: [], data: [] });
 
-const frappe = new FrappeApp(import.meta.env.VITE_FRAPPE_BASE_URL);
+export const frappe = {
+  call: noop,
+  db: {
+    get_list: noop,
+    get_doc: () => Promise.resolve({}),
+  },
+  request: noop,
+};
 
-export const call = frappe.call();
-export const db = frappe.db();
-export const auth = frappe.auth();
+export const useFrappeAuth = () => ({
+  currentUser: 'Guest',
+  logout: () => {},
+  login: () => Promise.resolve(),
+  isLoading: false,
+});
+
+export const useFrappeGetDocList = () => ({ data: [], isLoading: false, mutate: noop });
+export const useFrappeGetDoc = () => ({ data: {}, isLoading: false, mutate: noop });
