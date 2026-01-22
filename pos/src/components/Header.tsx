@@ -140,7 +140,7 @@ const Header = () => {
               variant="outline"
               size="sm"
               className="hidden md:flex items-center gap-2 border-blue-200 text-blue-600 hover:bg-blue-50"
-              onClick={() => window.location.href = '/app'}
+              onClick={() => window.location.href = window.location.origin + '/app'}
             >
               <Monitor className="w-4 h-4" />
               Desk
@@ -172,10 +172,10 @@ const Header = () => {
                     <Button
                       variant="ghost"
                       className="flex justify-start items-center w-full px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition-colors"
-                      onClick={() => window.location.href = '/app/administrator'}
+                      onClick={() => window.location.href = window.location.origin + '/app'}
                     >
                       <Command className="w-4 h-4 mr-3" />
-                      Painel Admin
+                      Painel Admin (Desk)
                     </Button>
                   )}
                   <Button
