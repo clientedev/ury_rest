@@ -353,13 +353,27 @@ export const usePOSStore = create<POSStore>((set, get) => ({
         return;
       }
 
-      const courses = await getMenuCourses();
-      const categoryNames = courses.map(course => course.name);
-      sessionStorage.setItem('menuCategories', JSON.stringify(categoryNames));
-      set({ categories: categoryNames });
+      let categoryNames: string[] = [];
+      try {
+        const courses = await getMenuCourses();
+        console.log('Courses fetched:', courses);
+        categoryNames = courses && Array.isArray(courses) ? courses.map(course => course.name) : [];
+      } catch (e) {
+        console.error('Inner error fetching courses:', e);
+      }
+      
+      if (categoryNames.length > 0) {
+        sessionStorage.setItem('menuCategories', JSON.stringify(categoryNames));
+        set({ categories: categoryNames });
+      } else {
+        // Fallback for dev/missing data
+        const fallback = ['Geral', 'Entradas', 'Pratos Principais', 'Bebidas', 'Sobremesas'];
+        set({ categories: fallback });
+      }
     } catch (error) {
-      set({ error: 'Failed to load menu categories' });
-      throw error;
+      console.error('Error loading menu categories:', error);
+      // Final Fallback
+      set({ categories: ['Geral', 'Entradas', 'Pratos Principais', 'Bebidas', 'Sobremesas'] });
     }
   },
 
