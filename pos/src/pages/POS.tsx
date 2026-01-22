@@ -87,13 +87,13 @@ export default function POS() {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
-          <p className="text-xl font-semibold text-red-600 mb-2">Failed to load POS</p>
+          <p className="text-xl font-semibold text-red-600 mb-2">Erro ao carregar o POS</p>
           <p className="text-gray-600">{error}</p>
           <button 
             onClick={() => window.location.reload()}
             className="mt-4 px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700"
           >
-            Retry
+            Tentar Novamente
           </button>
         </div>
       </div>
@@ -103,7 +103,7 @@ export default function POS() {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <Spinner message="Loading menu items..." />
+        <Spinner message="Carregando itens do menu..." />
       </div>
     );
   }
@@ -112,7 +112,7 @@ export default function POS() {
     return (
       <div className="flex-1 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-lg font-medium text-red-600">Error loading menu</p>
+          <p className="text-lg font-medium text-red-600">Erro ao carregar menu</p>
           <p className="text-sm text-gray-500 mt-2">{error}</p>
         </div>
       </div>
@@ -134,8 +134,8 @@ export default function POS() {
                 disabled={isMenuInteractionDisabled()}
               /> */}
               
-              <QuickFilterButton filter="all" icon={Star} label="All" />
-              <QuickFilterButton filter="special" icon={TrendingUp} label="Special Items" />
+              <QuickFilterButton filter="all" icon={Star} label="Todos" />
+              <QuickFilterButton filter="special" icon={TrendingUp} label="Itens Especiais" />
             </div>
           </div>
         </div>

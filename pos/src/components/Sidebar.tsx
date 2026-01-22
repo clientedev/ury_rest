@@ -41,7 +41,7 @@ const Sidebar = ({ disabled }: SidebarProps) => {
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
           {/* Section Title */}
           <h2 className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-3 px-1">
-            categories
+            categorias
           </h2>
           
           {/* All Items */}
@@ -63,7 +63,7 @@ const Sidebar = ({ disabled }: SidebarProps) => {
             
             <div className="flex items-center gap-3 ml-1">
               <Grid3X3 className="w-4 h-4 text-gray-500" />
-              <span>All Items</span>
+              <span>Todos os Itens</span>
             </div>
             
             <Badge variant="secondary" size="sm" className="text-xs text-gray-500 bg-gray-100 min-w-[24px] text-center">

@@ -25,16 +25,18 @@ const Header = () => {
   const { orderSearchQuery, setOrderSearchQuery } = useRootStore();
   const [orderSearchInput, setOrderSearchInput] = useState(orderSearchQuery);
 
+  const isAdmin = user?.roles?.includes('Administrator');
+
   // Determine placeholder and handlers based on route
-  let searchPlaceholder = 'Search orders, menu items, or customers...';
+  let searchPlaceholder = 'Pesquisar pedidos, itens ou clientes...';
   let searchValue: string | undefined = undefined;
   let searchOnChange: ((e: React.ChangeEvent<HTMLInputElement>) => void) | undefined = undefined;
   if (location.pathname === '/orders') {
-    searchPlaceholder = 'Search Orders';
+    searchPlaceholder = 'Pesquisar Pedidos';
     searchValue = orderSearchInput;
     searchOnChange = (e) => setOrderSearchInput(e.target.value);
   } else if (location.pathname === '/') {
-    searchPlaceholder = 'Search Menu';
+    searchPlaceholder = 'Pesquisar Menu';
     searchValue = searchQuery;
     searchOnChange = (e) => setSearchQuery(e.target.value);
   }
@@ -155,13 +157,23 @@ const Header = () => {
                   <p className="text-sm text-gray-500">{user?.name || ''}</p>
                 </div>
                 <div className="py-2">
+                  {isAdmin && (
+                    <Button
+                      variant="ghost"
+                      className="flex justify-start items-center w-full px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition-colors"
+                      onClick={() => window.location.href = '/app/administrator'}
+                    >
+                      <Command className="w-4 h-4 mr-3" />
+                      Painel Admin
+                    </Button>
+                  )}
                   <Button
                     variant="ghost"
                     className="flex justify-start items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                     onClick={() => window.location.href = '/app'}
                   >
                     <Monitor className="w-4 h-4 mr-3" />
-                    Switch To Desk
+                    Mudar para Desk
                   </Button>
                   <Button
                     variant="ghost"
@@ -169,7 +181,7 @@ const Header = () => {
                     onClick={handleClearCache}
                   >
                     <RefreshCw className="w-4 h-4 mr-3" />
-                    Clear Cache
+                    Limpar Cache
                   </Button>
                   <Button
                     variant="ghost"
@@ -177,7 +189,7 @@ const Header = () => {
                     onClick={handleLogout}
                   >
                     <LogOut className="w-4 h-4 mr-3" />
-                    Logout
+                    Sair
                   </Button>
                 </div>
               </div>

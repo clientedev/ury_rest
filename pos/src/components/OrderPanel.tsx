@@ -123,7 +123,7 @@ const OrderPanel = () => {
       
       // Reset all states after successful order submission
       resetOrderState();
-      showToast.success(isUpdatingOrder ? 'Order updated successfully' : 'Order created successfully');
+      showToast.success(isUpdatingOrder ? 'Pedido atualizado com sucesso' : 'Pedido criado com sucesso');
     } catch (error) {
       console.error('Failed to sync order:', error);
       // Frappe API error handling
@@ -131,14 +131,14 @@ const OrderPanel = () => {
         try {
           const messages = JSON.parse((error as any)._server_messages);
           const messageObj = JSON.parse(messages[0]);
-          showToast.error(messageObj.message || 'API error');
+          showToast.error(messageObj.message || 'Erro na API');
         } catch {
-          showToast.error('API error');
+          showToast.error('Erro na API');
         }
       } else if (error instanceof Error) {
         showToast.error(error.message);
       } else {
-        showToast.error('Failed to process order');
+        showToast.error('Falha ao processar pedido');
       }
     } finally {
       setIsSubmitting(false);
@@ -152,27 +152,27 @@ const OrderPanel = () => {
       </div>
       
       <h3 className="text-lg font-semibold text-gray-900 mb-2">
-        Your cart is empty
+        Seu carrinho está vazio
       </h3>
       
       <p className="text-gray-500 text-sm mb-6 max-w-xs leading-relaxed">
-        Add items to get started with your order
+        Adicione itens para começar seu pedido
       </p>
       
       <div className="flex items-center gap-2 text-blue-600 bg-blue-50 px-4 py-2 rounded-lg">
         <Plus className="w-4 h-4" />
-        <span className="text-sm font-medium">Click items to add them</span>
+        <span className="text-sm font-medium">Clique nos itens para adicioná-los</span>
       </div>
       
       <div className="mt-4 text-xs text-gray-400">
-        Double-click for customization options
+        Clique duas vezes para opções de personalização
       </div>
     </div>
   );
 
   const LoadingOrderUI = () => (
     <div className="h-96">
-      <Spinner message="Loading order details..." />
+      <Spinner message="Carregando detalhes do pedido..." />
     </div>
   );
 
@@ -277,7 +277,7 @@ const OrderPanel = () => {
                 className="w-full text-gray-600 hover:text-gray-800 mt-4"
                 disabled={isInteractionDisabled}
               >
-                Clear cart
+                Limpar carrinho
               </Button>
             )}
           </div>
@@ -294,7 +294,7 @@ const OrderPanel = () => {
                     orderComment ? "text-blue-600" : "text-gray-500 hover:text-gray-700"
                   )}
                   disabled={isInteractionDisabled}
-                  title={orderComment ? "Edit comment" : "Add comment"}
+                  title={orderComment ? "Editar comentário" : "Adicionar comentário"}
                 >
                   <MessageSquare className="w-4 h-4" />
                 </Button>
@@ -312,12 +312,12 @@ const OrderPanel = () => {
               {isSubmitting ? (
                 <div className="flex items-center">
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  {isUpdatingOrder ? 'Updating Order...' : 'Processing Order...'}
+                  {isUpdatingOrder ? 'Atualizando Pedido...' : 'Processando Pedido...'}
                 </div>
               ) : isUpdatingOrder ? (
-                'Update Order'
+                'Atualizar Pedido'
               ) : (
-                'Add New Order'
+                'Novo Pedido'
               )}
             </Button>
           </div>
