@@ -25,7 +25,7 @@ const Header = () => {
   const { orderSearchQuery, setOrderSearchQuery } = useRootStore();
   const [orderSearchInput, setOrderSearchInput] = useState(orderSearchQuery);
 
-  const isAdmin = user?.roles?.includes('Administrator');
+  const isAdmin = user?.roles?.includes('Administrator') || user?.name === 'Administrator';
 
   // Determine placeholder and handlers based on route
   let searchPlaceholder = 'Pesquisar pedidos, itens ou clientes...';
@@ -135,6 +135,17 @@ const Header = () => {
 
         {/* Right side actions */}
         <div className="flex items-center space-x-4">
+          {isAdmin && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="hidden md:flex items-center gap-2 border-blue-200 text-blue-600 hover:bg-blue-50"
+              onClick={() => window.location.href = '/app'}
+            >
+              <Monitor className="w-4 h-4" />
+              Desk
+            </Button>
+          )}
           {/* User menu */}
           <div className="relative" ref={userMenuRef}>
             <Button

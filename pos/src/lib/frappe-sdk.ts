@@ -16,7 +16,14 @@ const mockPosProfile = {
   currency: 'BRL',
   waiter: 'Administrator',
   cashier: 'Administrator',
-  company: 'My Company'
+  company: 'My Company',
+  roles: [{ role: 'Administrator' }]
+};
+
+const mockUser = {
+  name: 'Administrator',
+  full_name: 'Usuário Admin',
+  roles: [{ role: 'Administrator' }]
 };
 
 const mockOrders = [
@@ -72,12 +79,14 @@ export const db = {
     if (path === 'URY Menu Course') return Promise.resolve(mockCategories);
     return Promise.resolve([]);
   },
-  get_doc: (doctype: string) => {
+  get_doc: (doctype: string, name?: string) => {
     if (doctype === 'POS Profile') return Promise.resolve(mockPosProfile);
+    if (doctype === 'User') return Promise.resolve(mockUser);
     return Promise.resolve({});
   },
-  getDoc: (doctype: string) => {
+  getDoc: (doctype: string, name?: string) => {
     if (doctype === 'POS Profile') return Promise.resolve(mockPosProfile);
+    if (doctype === 'User') return Promise.resolve(mockUser);
     return Promise.resolve({});
   },
   getDocList: (doctype: string) => {
